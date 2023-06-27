@@ -1,17 +1,17 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap_integers - Swap two integers in an array.
+ * @i: The first integer to swap.
+ * @j: The second integer to swap.
  */
-void swap_ints(int *a, int *b)
+void swap_integers(int *i, int *j)
 {
-	int tmp;
+	int temporary;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	temporary = *i;
+	*i = *j;
+	*j = temporary;
 }
 
 /**
@@ -23,22 +23,21 @@ void swap_ints(int *a, int *b)
  */
 void max_heapify(int *array, size_t size, size_t base, size_t root)
 {
-	size_t left, right, large;
+	size_t left = 2 * root + 1, right = 2 * root + 2, largest = root;
 
-	left = 2 * root + 1;
-	right = 2 * root + 2;
-	large = root;
-
-	if (left < base && array[left] > array[large])
-		large = left;
-	if (right < base && array[right] > array[large])
-		large = right;
-
-	if (large != root)
+	if (left < base && array[left] > array[largest])
 	{
-		swap_ints(array + root, array + large);
+		largest = left;
+	}
+	if (right < base && array[right] > array[largest])
+	{
+		largest = right;
+	}
+	if (largest != root)
+	{
+		swap_integers(array + root, array + largest);
 		print_array(array, size);
-		max_heapify(array, size, base, large);
+		max_heapify(array, size, base, largest);
 	}
 }
 
@@ -47,9 +46,8 @@ void max_heapify(int *array, size_t size, size_t base, size_t root)
  *             order using the heap sort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
- *
  * Description: Implements the sift-down heap sort
- * algorithm. Prints the array after each swap.
+ *		algorithm. Prints the array after each swap.
  */
 void heap_sort(int *array, size_t size)
 {
@@ -63,7 +61,7 @@ void heap_sort(int *array, size_t size)
 
 	for (i = size - 1; i > 0; i--)
 	{
-		swap_ints(array, array + i);
+		swap_integers(array, array + i);
 		print_array(array, size);
 		max_heapify(array, size, i, 0);
 	}
