@@ -1,17 +1,17 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap_integers - Swap two integers in an array.
+ * @i: The first integer to swap.
+ * @j: The second integer to swap.
  */
-void swap_ints(int *a, int *b)
+void swap_integers(int *i, int *j)
 {
-	int tmp;
+	int temporary;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	temporary = *i;
+	*i = *j;
+	*j = temporary;
 }
 
 /**
@@ -33,7 +33,7 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
 		{
 			if ((flow == UP && array[i] > array[i + jump]) ||
 			    (flow == DOWN && array[i] < array[i + jump]))
-				swap_ints(array + i, array + i + jump);
+				swap_integers(array + i, array + i + jump);
 		}
 		bitonic_merge(array, size, start, jump, flow);
 		bitonic_merge(array, size, start + jump, jump, flow);
@@ -72,7 +72,6 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
  *                order using the bitonic sort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
- *
  * Description: Prints the array after each swap. Only works for
  * size = 2^k where k >= 0 (ie. size equal to powers of 2).
  */
