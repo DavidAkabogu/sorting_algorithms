@@ -31,14 +31,14 @@ int hoare_partition(int *array, size_t size, int low, int high)
 
 	for (above = low - 1, below = high + 1; above < below;)
 	{
-		while (array[above] < pivot)
-		{
+		do {
 			above++;
-		}
-		while (array[below] > pivot)
-		{
+		} while (array[above] < pivot);
+
+		do {
 			below--;
-		}
+		} while (array[below] > pivot);
+
 		if (above < below)
 		{
 			swap_integers(array + above, array + below);
